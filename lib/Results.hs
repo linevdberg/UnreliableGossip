@@ -1,4 +1,3 @@
-
 module Results where
 
 import AgentTypes
@@ -82,12 +81,12 @@ instance Arbitrary ArbTable where
       iType <- elements [Reliable, AlternatingBluffer]
       n' <- sublistOf (ags \\ [i])
       let n = sort $ i : n'
-      s' <- sublistOf (n \\ [i])
-      let s = sort $ i : s'
       -- generate initial graphs, uncomment next line:
       return (i,(n,([i],[],[]),iType,None))) ags
-      -- generate random graphs, uncomment next line:
-      --return (i,(n, (s,[],[]), iType, None))) ags
+      -- generate random graphs, uncomment next three lines:
+      -- s' <- sublistOf (n \\ [i])
+      -- let s = sort $ i : s'
+      -- return (i,(n, (s,[],[]), iType, None))) ags
     -- to have also isolated agents, uncomment next line:
     --return $ ArbT t
     -- only graphs without isolated agents (note: [] is now valid):
@@ -107,12 +106,12 @@ instance Arbitrary ArbTableUT where
       n' <- sublistOf (ags \\ [i])
       let n | iType == Reliable = sort $ i : n'
             | otherwise         = [i]
-      s' <- sublistOf (n \\ [i])
-      let s | iType == Reliable = sort $ i : s'
-            | otherwise         = [i]
       -- generate initial graphs, uncomment next line:
       return (i,(n,([i],[],[]),iType,None))) ags
-      -- generate random graphs, uncomment next line:
+      -- generate random graphs, uncomment next four lines:
+      -- s' <- sublistOf (n \\ [i])
+      -- let s | iType == Reliable = sort $ i : s'
+      ---      | otherwise         = [i]
       --return (i,(n,(s,[],[]),iType,None))) ags
     -- to have also isolated agents, uncomment next line:
     -- return $ arBTUT t

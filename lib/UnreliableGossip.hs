@@ -1,4 +1,3 @@
-
 module UnreliableGossip where
 
 import AgentTypes
